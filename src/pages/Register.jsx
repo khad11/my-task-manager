@@ -24,8 +24,8 @@ export const action = async ({ request }) => {
 function Register() {
   const { registerWithEmailAndPassword } = useRegister();
   const data = useActionData();
+
   useEffect(() => {
-    // tekshirish
     if (data) {
       registerWithEmailAndPassword(data.displayName, data.email, data.password);
     }
@@ -43,56 +43,49 @@ function Register() {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
+    return;
   };
-
-  //   ONSUBMIT FUNKSIYA
   const handleSubmit = (e) => {
     e.preventDefault();
     const { name, email, password, repeatpassword } = formData;
 
-    const trimmedName = name.trim();
-    const trimmedEmail = email.trim();
-    const trimmedPassword = password.trim();
-    const trimmedRepeatPassword = repeatpassword.trim();
+    const trimmedName = name?.trim();
+    const trimmedEmail = email?.trim();
+    const trimmedPassword = password?.trim();
+    const trimmedRepeatPassword = repeatpassword?.trim();
 
-    // qaysidir malumot yoqligini tekshirish
+    // Barcha maydonlarni birdaniga tekshirish
     if (
       !trimmedName ||
       !trimmedEmail ||
       !trimmedPassword ||
       !trimmedRepeatPassword
     ) {
-      toast.warning(
-        "Qaysidir malumot toldirilmagan.Iltimos ma'lumotni to'ldiring"
-      );
-      return;
-    }
-    // paswordni 6 ta raqamli bolish sharti
-    if (trimmedPassword.length < 6) {
-      toast.warning(
-        "kiritilgan parolingiz kamida  6 ta elemetdan iborat bolishi kerak "
-      );
-      return;
-    }
-    // password bilan repeatpaswordni bir xilligini tekshirish
-    if (trimmedRepeatPassword !== trimmedPassword) {
-      toast.warning("bir parol kiritilmagan!");
-      return;
+      toast.warning("At least one field is not filled!");
     }
 
-    // bitta harf borligini tekshirish
-    const containsLetter = /[a-zA-Z]/.test(trimmedPassword);
-    if (!containsLetter) {
-      toast.error("parolingizda kamida 1 ta harf bolishi kerak");
-      return;
+    // Password uzunligini tekshirish
+    else if (trimmedPassword.length < 6) {
+      toast.error("Password must be at least 6 characters long!");
     }
-    toast.success("E rahmat!");
+
+    // Password va Repeat Password mosligini tekshirish
+    else if (trimmedPassword !== trimmedRepeatPassword) {
+      toast.error("Passwords do not match!");
+    }
+
+    // Muvaffaqiyatli xabar
+    else {
+      toast.success("Registration successful!");
+      console.log(1);
+    }
   };
 
   return (
     <div className="h-screen grid place-items-center w-full  registerbg  ">
       <ToastContainer />
       <Form
+        onSubmit={handleSubmit}
         method="post"
         className="max-w-96 mx-auto w-full  bg-slate-400 p-10 rounded-2xl "
       >
@@ -102,33 +95,33 @@ function Register() {
         <FormInput
           type="text"
           placeholder="Name"
-          lebel="Enter your Name"
+          label="Enter your Name"
           name="name"
           value={formData.name}
-          onchange={handleChange}
+          onChange={handleChange}
         />
         <FormInput
           type="email"
           placeholder="Email"
-          lebel="Enter your email"
+          label="Enter your email"
           name="email"
           value={formData.email}
-          onchange={handleChange}
+          onChange={handleChange}
         />
         <FormInput
           type="password"
           placeholder="Password"
-          lebel=" Password"
+          label=" Password"
           name="password"
           value={formData.password}
-          onchange={handleChange}
+          onChange={handleChange}
         />
         <FormInput
           type="password"
           placeholder=" Repeat Password"
-          lebel="Password"
+          label="Password"
           value={formData.repeatpassword}
-          onchange={handleChange}
+          onChange={handleChange}
         />
         <div className="mt-5 ">
           <button

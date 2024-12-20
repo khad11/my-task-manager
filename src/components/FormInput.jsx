@@ -1,10 +1,10 @@
 import React from "react";
 
-function FormInput({ type, lebel, placeholder, name }) {
+function FormInput({ type, label, placeholder, name }) {
   return (
     <label className="form-control w-full mb-2 ">
       <div className="label">
-        <span className="label-text text-black ">{lebel}</span>
+        <span className="label-text text-black ">{label}</span>
       </div>
       <input
         type={type}
