@@ -45,47 +45,47 @@ function Register() {
     setFormData((prev) => ({ ...prev, [name]: value }));
     return;
   };
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const { name, email, password, repeatpassword } = formData;
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   const { name, email, password, repeatpassword } = formData;
 
-    const trimmedName = name?.trim();
-    const trimmedEmail = email?.trim();
-    const trimmedPassword = password?.trim();
-    const trimmedRepeatPassword = repeatpassword?.trim();
+  //   const trimmedName = name?.trim();
+  //   const trimmedEmail = email?.trim();
+  //   const trimmedPassword = password?.trim();
+  //   const trimmedRepeatPassword = repeatpassword?.trim();
 
-    // Barcha maydonlarni birdaniga tekshirish
-    if (
-      !trimmedName ||
-      !trimmedEmail ||
-      !trimmedPassword ||
-      !trimmedRepeatPassword
-    ) {
-      toast.warning("At least one field is not filled!");
-    }
+  //   // Barcha maydonlarni birdaniga tekshirish
+  //   if (
+  //     !trimmedName ||
+  //     !trimmedEmail ||
+  //     !trimmedPassword ||
+  //     !trimmedRepeatPassword
+  //   ) {
+  //     toast.warning("At least one field is not filled!");
+  //   }
 
-    // Password uzunligini tekshirish
-    else if (trimmedPassword.length < 6) {
-      toast.error("Password must be at least 6 characters long!");
-    }
+  //   // Password uzunligini tekshirish
+  //   else if (trimmedPassword.length < 6) {
+  //     toast.error("Password must be at least 6 characters long!");
+  //   }
 
-    // Password va Repeat Password mosligini tekshirish
-    else if (trimmedPassword !== trimmedRepeatPassword) {
-      toast.error("Passwords do not match!");
-    }
+  //   // Password va Repeat Password mosligini tekshirish
+  //   else if (trimmedPassword !== trimmedRepeatPassword) {
+  //     toast.error("Passwords do not match!");
+  //   }
 
-    // Muvaffaqiyatli xabar
-    else {
-      toast.success("Registration successful!");
-      console.log(1);
-    }
-  };
+  //   // Muvaffaqiyatli xabar
+  //   else {
+  //     toast.success("Registration successful!");
+  //     console.log(1);
+  //   }
+  // };
 
   return (
     <div className="h-screen grid place-items-center w-full  registerbg  ">
       <ToastContainer />
       <Form
-        onSubmit={handleSubmit}
+        // onSubmit={handleSubmit}
         method="post"
         className="max-w-96 mx-auto w-full  bg-slate-400 p-10 rounded-2xl "
       >
